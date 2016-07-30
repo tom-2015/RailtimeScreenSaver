@@ -206,9 +206,10 @@ Public Class SNCBTemplate
                             Dim STrainType As String = Mid(Train.Type, 2)
                             Dim STrainTypeFont As New Font(TrainFont.FontFamily, TrainFont.Size * 3 / 4)
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString("S", TrainFont)
-                            Dim STrainTypeSize As SizeF = Graphics.MeasureString(STrainType, STrainTypeFont)
-                            Dim STrainTypeCricle As New RectangleF(TrackRect.X - BorderWidth - STrainTypeSize.Width * 5 / 4, TrackRect.Y + TrainTypeSize.Height * 1 / 4, STrainTypeSize.Width * 2 / STrainType.Length * 4 / 5, STrainTypeSize.Width * 2 / STrainType.Length * 4 / 5)
+                            Dim STrainTypeSize As SizeF = Graphics.MeasureString("0", STrainTypeFont) ' STrainType, STrainTypeFont)
+                            Dim STrainTypeCricle As New RectangleF(TrackRect.X - BorderWidth - STrainTypeSize.Width * 5 / 4, TrackRect.Y + TrainTypeSize.Height * 1 / 4, STrainTypeSize.Width * 2 * 4 / 5, STrainTypeSize.Width * 2 * 4 / 5)
                             Graphics.DrawString("S", TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width - STrainTypeSize.Width, TrackRect.Y)
+                            'Graphics.DrawString("S", TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width - STrainTypeCricle.Width, TrackRect.Y)
 
                             Graphics.FillEllipse(m_ForeColorBrush, STrainTypeCricle)
                             PrintCentered(STrainType, STrainTypeCricle, Graphics, STrainTypeFont, New SolidBrush(TrainRectColor))

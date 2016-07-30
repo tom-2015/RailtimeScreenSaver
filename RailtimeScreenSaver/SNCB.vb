@@ -312,7 +312,7 @@ Public Class SNCB
 
         Dim TrainTypeFlags As TrainData.TrainTypeFlags = RailtimeScreenSaver.TrainData.TrainTypeFlags.TrainTypeNormal
 
-        If TrainType Like "S#" Then
+        If TrainType Like "S#" OrElse TrainType Like "S##" Then
             TrainTypeFlags = TrainTypeFlags Or RailtimeScreenSaver.TrainData.TrainTypeFlags.TrainTypeSBahn
         Else
             If InStr(TrainDestination, "airport", CompareMethod.Text) > 0 OrElse _
