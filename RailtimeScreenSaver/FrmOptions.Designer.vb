@@ -34,6 +34,8 @@ Partial Class FrmOptions
         Me.Label2 = New System.Windows.Forms.Label
         Me.CmdCancel = New System.Windows.Forms.Button
         Me.CmdSave = New System.Windows.Forms.Button
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel
+        Me.LblVersion = New System.Windows.Forms.Label
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -146,11 +148,32 @@ Partial Class FrmOptions
         Me.CmdSave.Text = "Save"
         Me.CmdSave.UseVisualStyleBackColor = True
         '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Location = New System.Drawing.Point(12, 375)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(46, 13)
+        Me.LinkLabel1.TabIndex = 7
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "Website"
+        '
+        'LblVersion
+        '
+        Me.LblVersion.AutoSize = True
+        Me.LblVersion.Location = New System.Drawing.Point(12, 393)
+        Me.LblVersion.Name = "LblVersion"
+        Me.LblVersion.Size = New System.Drawing.Size(22, 13)
+        Me.LblVersion.TabIndex = 8
+        Me.LblVersion.Text = "1.0"
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(337, 418)
+        Me.Controls.Add(Me.LblVersion)
+        Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.CmdCancel)
         Me.Controls.Add(Me.CmdSave)
         Me.Controls.Add(Me.TabControl1)
@@ -166,6 +189,7 @@ Partial Class FrmOptions
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
@@ -179,4 +203,6 @@ Partial Class FrmOptions
     Friend WithEvents TemplateProperties As System.Windows.Forms.PropertyGrid
     Friend WithEvents CmdCancel As System.Windows.Forms.Button
     Friend WithEvents CmdSave As System.Windows.Forms.Button
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LblVersion As System.Windows.Forms.Label
 End Class

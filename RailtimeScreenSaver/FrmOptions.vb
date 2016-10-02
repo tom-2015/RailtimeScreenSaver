@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Reflection
 
 Public Class FrmOptions
 
@@ -11,6 +12,8 @@ Public Class FrmOptions
             CmbTemplate.SelectedIndex = 1
         End If
         CmbDataSource.SelectedIndex = 0
+        LblVersion.Text = Assembly.GetExecutingAssembly().GetName().Version().ToString()
+
     End Sub
 
     Public Sub New()
@@ -63,5 +66,14 @@ Public Class FrmOptions
 
     Private Sub DataGrabberProperties_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles DataGrabberProperties.PropertyValueChanged
         TrainDataGrabber.RefreshTrainData(Now())
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Try
+            Dim sInfo As New ProcessStartInfo("https://github.com/tom-2015/RailtimeScreenSaver")
+            Process.Start(sInfo)
+        Catch ex As Exception
+            MsgBox("Oops error " & ex.Message())
+        End Try
     End Sub
 End Class

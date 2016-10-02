@@ -19,7 +19,11 @@
     <OptionInfer>On</OptionInfer>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>AM96.ico</ApplicationIcon>
-    <PublishUrl>publish\</PublishUrl>
+    <ManifestCertificateThumbprint>977A22822A85FF32D00A35C75C3EF4F30633DED3</ManifestCertificateThumbprint>
+    <ManifestKeyFile>RailtimeScreenSaver_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <PublishUrl>go\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,8 +33,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <ProductName>Railtime Screen Saver</ProductName>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -168,6 +173,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="RailtimeScreenSaver_TemporaryKey.pfx" />
     <None Include="Resources\airplane.bmp" />
   </ItemGroup>
   <ItemGroup>
