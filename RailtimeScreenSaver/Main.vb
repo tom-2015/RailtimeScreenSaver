@@ -23,11 +23,32 @@ Module Main
 
     Private Declare Function SystemParametersInfo Lib "user32" Alias "SystemParametersInfoA" (ByVal uAction As Integer, ByVal uParam As Integer, ByVal lpvParam As Integer, ByVal fuWinIni As Integer) As Integer
 
-    Public Sub Main()
-        Dim CmdLine As String = LCase(Command)
-        Dim StartupType As String = LCase(Left(CmdLine, 2))
+    Public Function GetSettingsFile() As String
+        Dim CmdLineArgs As String() = Environment.GetCommandLineArgs()
+        For i As Integer = 0 To CmdLineArgs.Count - 1
+            If LCase(CmdLineArgs(i)) = "-s" Then
+                If i + 1 < CmdLineArgs.Count Then
+                    Return CmdLineArgs(i + 1)
+                End If
+            End If
+        Next
+        Dim Res As String = Path.GetDirectoryName(Application.ExecutablePath) & Path.DirectorySeparatorChar & "railtime_settings.xml"
+        If Not File.Exists(Res) Then
+            Dim AppDataFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & Path.DirectorySeparatorChar & "railtime_screensaver"
+            If Not Directory.Exists(Res) Then
+                Directory.CreateDirectory(AppDataFolder)
+            End If
+            Res = AppDataFolder & Path.DirectorySeparatorChar & "railtime_settings.xml"
+        End If
+        Return Res
+    End Function
 
-        SettingsFile = Path.GetDirectoryName(Application.ExecutablePath) & Path.DirectorySeparatorChar & "railtime_settings.xml"
+    Public Sub Main()
+        Dim CmdLineArgs() As String = Environment.GetCommandLineArgs()
+        'Dim CmdLine As String = LCase(Command)
+        'Dim StartupType As String = LCase(Left(CmdLine, 2))
+
+        SettingsFile = GetSettingsFile()
         Settings = New Settings()
         Settings.Load(SettingsFile)
 
@@ -53,37 +74,50 @@ Module Main
 
         ScreenSaverForms.Add(Saver) 'for /p (preview) only load 1 screen saver form!
 
-        Select Case StartupType
-            Case "/c"
-                RunningMode = ScreenSaverRunningModes.Configuration
-                FrmOptions.ShowDialog()
-                Return
-            Case "/t" 'test mode, show options and screen saver window
-                RunningMode = ScreenSaverRunningModes.Configuration
-                FrmOptions.Show()
-            Case "/s"
-                Cursor.Hide()
-                SetScreenSaverRunning(True)
-                RunningMode = ScreenSaverRunningModes.ScreenSaverEnabled
-                For Each ScreenSaverForm As FrmSaver In ScreenSaverForms
-                    ScreenSaverForm.FormBorderStyle = FormBorderStyle.None
-                    ScreenSaverForm.TopMost = True
-                    ScreenSaverForm.WindowState = FormWindowState.Maximized
-                Next
-            Case "/p"
-                ScreenSaverForms(0).ShowInTaskbar = False
-                RunningMode = ScreenSaverRunningModes.Configuration
-                Dim Hwnd As Integer = Val(Trim(Mid(Command, 3)))
-                If Hwnd > 0 Then
-                    If IsWindows() Then
-                        ScreenSaverForms(0).FormBorderStyle = FormBorderStyle.None 'important do this before DoPreviewMode or the program will not detect the close window event from the preview dialog and continue running when other is selected
-                        DoPreviewMode(Hwnd, ScreenSaverForms(0).Handle)
-                        ScreenSaverForms(0).WindowState = FormWindowState.Maximized
+        For i As Integer = 0 To CmdLineArgs.Count - 1
+            Select Case LCase(CmdLineArgs(i))
+                Case "/c"
+                    RunningMode = ScreenSaverRunningModes.Configuration
+                    FrmOptions.ShowDialog()
+                    Return
+                Case "/t" 'test mode, show options and screen saver window
+                    RunningMode = ScreenSaverRunningModes.Configuration
+                    FrmOptions.Show()
+                Case "/s"
+                    Cursor.Hide()
+                    SetScreenSaverRunning(True)
+                    RunningMode = ScreenSaverRunningModes.ScreenSaverEnabled
+                    For Each ScreenSaverForm As FrmSaver In ScreenSaverForms
+                        ScreenSaverForm.FormBorderStyle = FormBorderStyle.None
+                        ScreenSaverForm.TopMost = True
+                        ScreenSaverForm.WindowState = FormWindowState.Maximized
+                    Next
+                Case "/p"
+                    ScreenSaverForms(0).ShowInTaskbar = False
+                    RunningMode = ScreenSaverRunningModes.Configuration
+                    Dim Hwnd As Integer
+                    If i + 1 < CmdLineArgs.Count Then Hwnd = Val(Trim(CmdLineArgs(i + 1)))
+                    If Hwnd > 0 Then
+                        If IsWindows() Then
+                            ScreenSaverForms(0).FormBorderStyle = FormBorderStyle.None 'important do this before DoPreviewMode or the program will not detect the close window event from the preview dialog and continue running when other is selected
+                            DoPreviewMode(Hwnd, ScreenSaverForms(0).Handle)
+                            ScreenSaverForms(0).WindowState = FormWindowState.Maximized
+                        End If
                     End If
-                End If
-            Case "/w"
-                TrainDataGrabber.Station = Trim(Mid(Command, 3))
-        End Select
+                Case "/w"
+                    TrainDataGrabber.Station = Trim(Mid(Command, 3))
+                Case "-s"
+
+                Case "/?", "-?"
+                    MsgBox("Supported command line options: " & vbCrLf & _
+                           "/C          Show configuration window." & vbCrLf & _
+                           "/T          Test mode." & vbCrLf & _
+                           "/S          Run screensaver in full screen." & vbCrLf & _
+                           "/P <hwnd>   Preview mode, hwnd is preview window handle." & vbCrLf & _
+                           "/W          Window mode." & vbCrLf & _
+                           "-s <path>   Use settings in <path> config file, default is railtime_settings.xml in program directory or if not exists settings is created in %appdata%/railtime_screensaver folder is used.")
+            End Select
+        Next
 
         RefreshThread = New Thread(AddressOf UpdateTrainDataThreadSub)
         RefreshThread.Start()
