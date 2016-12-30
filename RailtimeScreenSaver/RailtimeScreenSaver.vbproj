@@ -178,10 +178,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AM96.ico" />
+    <None Include="Resources\THA.bmp" />
     <None Include="Resources\EUR.bmp" />
     <None Include="Resources\ICE.bmp" />
     <None Include="Resources\TGV.bmp" />
-    <None Include="Resources\THA.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
