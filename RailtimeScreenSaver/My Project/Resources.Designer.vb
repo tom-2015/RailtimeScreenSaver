@@ -66,5 +66,33 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        Friend ReadOnly Property EUR() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("EUR", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property ICE() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ICE", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property TGV() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("TGV", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property THA() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("THA", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
     End Module
 End Namespace

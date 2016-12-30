@@ -201,6 +201,7 @@ Public Class SNCBTemplate
                         End If
                         PrintCentered(TrackText, TrackRect, Graphics, TrainFont, New SolidBrush(TrackColor))
 
+                        Dim TrainType As String = UCase$(Train.Type)
                         'draw train type
                         If Train.IsSBahnTrain Then
                             Dim STrainType As String = Mid(Train.Type, 2)
@@ -213,7 +214,7 @@ Public Class SNCBTemplate
 
                             Graphics.FillEllipse(m_ForeColorBrush, STrainTypeCricle)
                             PrintCentered(STrainType, STrainTypeCricle, Graphics, STrainTypeFont, New SolidBrush(TrainRectColor))
-                        ElseIf Train.IsAirportTrain AndAlso (Now().Second Mod 2) = 0 Then
+                        ElseIf Train.IsAirportTrain AndAlso (Now.Second Mod 2) = 0 Then
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString("XX", TrainFont)
                             Dim AirPlaneSize As Integer = TrainTypeSize.Width * 4 / 5
                             Dim AirplaneIcon As Bitmap = My.Resources.airplane
@@ -222,6 +223,24 @@ Public Class SNCBTemplate
                             Pallete.Entries(1) = Color.FromArgb(0, 0, 0, 0)
                             AirplaneIcon.Palette = Pallete
                             Graphics.DrawImage(AirplaneIcon, New RectangleF(TrackRect.X - BorderWidth - AirPlaneSize, TrackRect.Y, AirPlaneSize, AirPlaneSize))
+                        ElseIf TrainType = "TGV" OrElse TrainType = "THA" OrElse TrainType = "ICE" OrElse TrainType = "TGV" OrElse TrainType = "EUR" Then
+                            If (Now.Second Mod 2) = 0 OrElse Train.TrainNumber = "" Then
+                                'Dim LogoSize As SizeF = Graphics.MeasureString("Ag", TrainFont)
+                                ' LogoSize.Height * 4 / 5
+                                Dim Logo As Bitmap = My.Resources.ResourceManager.GetObject(TrainType)
+                                Dim LogoWidth As Double = TrackRect.Height / Logo.Height * Logo.Width * 7 / 8
+                                Dim Pallete As System.Drawing.Imaging.ColorPalette = Logo.Palette
+                                Pallete.Entries(0) = m_ForeColor
+                                Pallete.Entries(1) = Color.FromArgb(0, 0, 0, 0)
+                                Logo.Palette = Pallete
+                                Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBilinear
+                                Graphics.DrawImage(Logo, New RectangleF(TrackRect.X - BorderWidth - LogoWidth, TrackRect.Y, LogoWidth, TrackRect.Height))
+                                Graphics.InterpolationMode = Drawing2D.InterpolationMode.Default
+                                Graphics.DrawImage(Logo, New RectangleF(TrackRect.X - BorderWidth - LogoWidth, TrackRect.Y, LogoWidth, TrackRect.Height))
+                            Else
+                                Dim TrainTypeSize As SizeF = Graphics.MeasureString(Train.TrainNumber, TrainFont)
+                                Graphics.DrawString(Train.TrainNumber, TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)
+                            End If
                         Else
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString(Train.Type, TrainFont)
                             Graphics.DrawString(Train.Type, TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)

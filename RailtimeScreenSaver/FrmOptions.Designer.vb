@@ -165,7 +165,7 @@ Partial Class FrmOptions
         Me.LblVersion.Name = "LblVersion"
         Me.LblVersion.Size = New System.Drawing.Size(22, 13)
         Me.LblVersion.TabIndex = 8
-        Me.LblVersion.Text = "1.0"
+        Me.LblVersion.Text = "1.2"
         '
         'FrmOptions
         '
