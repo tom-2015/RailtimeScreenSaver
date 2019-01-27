@@ -74,7 +74,10 @@ Module Main
 
         ScreenSaverForms.Add(Saver) 'for /p (preview) only load 1 screen saver form!
 
-        For i As Integer = 0 To CmdLineArgs.Count - 1
+        For i As Integer = 1 To CmdLineArgs.Count - 1
+            If CmdLineArgs(i).ToLower() Like "/c:*" Then 'windows 10 gives a hwnd for configuration??
+                CmdLineArgs(i) = "/c"
+            End If
             Select Case LCase(CmdLineArgs(i))
                 Case "/c"
                     RunningMode = ScreenSaverRunningModes.Configuration
@@ -109,12 +112,12 @@ Module Main
                 Case "-s"
 
                 Case "/?", "-?"
-                    MsgBox("Supported command line options: " & vbCrLf & _
-                           "/C          Show configuration window." & vbCrLf & _
-                           "/T          Test mode." & vbCrLf & _
-                           "/S          Run screensaver in full screen." & vbCrLf & _
-                           "/P <hwnd>   Preview mode, hwnd is preview window handle." & vbCrLf & _
-                           "/W          Window mode." & vbCrLf & _
+                    MsgBox("Supported command line options: " & vbCrLf &
+                           "/C          Show configuration window." & vbCrLf &
+                           "/T          Test mode." & vbCrLf &
+                           "/S          Run screensaver in full screen." & vbCrLf &
+                           "/P <hwnd>   Preview mode, hwnd is preview window handle." & vbCrLf &
+                           "/W          Window mode." & vbCrLf &
                            "-s <path>   Use settings in <path> config file, default is railtime_settings.xml in program directory or if not exists settings is created in %appdata%/railtime_screensaver folder is used.")
             End Select
         Next
