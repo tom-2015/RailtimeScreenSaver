@@ -8,5 +8,5 @@ It can be used as a [screen saver](https://github.com/tom-2015/RailtimeScreenSav
 
 ![screenshot 3](https://github.com/tom-2015/RailtimeScreenSaver/raw/master/screenshot_rpi.png)
 
-This program requires the .NET framework 3.0!
-Don't forget to install the [.NET framework from Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=30653) if you don't have it installed yet.
+This program requires the .NET framework 4!
+Don't forget to install the [.NET framework from Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=17851) if you don't have it installed yet.
