@@ -220,7 +220,7 @@ Public Class SNCBTemplate
                             Dim AirplaneIcon As Bitmap = My.Resources.airplane
                             Dim Pallete As System.Drawing.Imaging.ColorPalette = AirplaneIcon.Palette
                             Pallete.Entries(0) = m_ForeColor
-                            Pallete.Entries(1) = Color.FromArgb(0, 0, 0, 0)
+                            Pallete.Entries(1) = Color.FromArgb(0, TrainRectColor.R, TrainRectColor.G, TrainRectColor.B)
                             AirplaneIcon.Palette = Pallete
                             Graphics.DrawImage(AirplaneIcon, New RectangleF(TrackRect.X - BorderWidth - AirPlaneSize, TrackRect.Y, AirPlaneSize, AirPlaneSize))
                         ElseIf TrainType = "TGV" OrElse TrainType = "THA" OrElse TrainType = "ICE" OrElse TrainType = "TGV" OrElse TrainType = "EUR" Then
@@ -231,7 +231,7 @@ Public Class SNCBTemplate
                                 Dim LogoWidth As Double = TrackRect.Height / Logo.Height * Logo.Width * 7 / 8
                                 Dim Pallete As System.Drawing.Imaging.ColorPalette = Logo.Palette
                                 Pallete.Entries(0) = m_ForeColor
-                                Pallete.Entries(1) = Color.FromArgb(0, 0, 0, 0)
+                                Pallete.Entries(1) = Color.FromArgb(0, TrainRectColor.R, TrainRectColor.G, TrainRectColor.B)
                                 Logo.Palette = Pallete
                                 Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBilinear
                                 Graphics.DrawImage(Logo, New RectangleF(TrackRect.X - BorderWidth - LogoWidth, TrackRect.Y, LogoWidth, TrackRect.Height))
