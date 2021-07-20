@@ -23,19 +23,19 @@ Partial Class FrmOptions
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmOptions))
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.CmbDataSource = New System.Windows.Forms.ComboBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.DataGrabberProperties = New System.Windows.Forms.PropertyGrid
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.TemplateProperties = New System.Windows.Forms.PropertyGrid
-        Me.CmbTemplate = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.CmdCancel = New System.Windows.Forms.Button
-        Me.CmdSave = New System.Windows.Forms.Button
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel
-        Me.LblVersion = New System.Windows.Forms.Label
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.CmbDataSource = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DataGrabberProperties = New System.Windows.Forms.PropertyGrid()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TemplateProperties = New System.Windows.Forms.PropertyGrid()
+        Me.CmbTemplate = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.CmdCancel = New System.Windows.Forms.Button()
+        Me.CmdSave = New System.Windows.Forms.Button()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.LblVersion = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class FrmOptions
         '
         Me.CmbDataSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbDataSource.FormattingEnabled = True
-        Me.CmbDataSource.Items.AddRange(New Object() {"m.nmbs.be"})
+        Me.CmbDataSource.Items.AddRange(New Object() {"m.nmbs.be", "api.irail.be"})
         Me.CmbDataSource.Location = New System.Drawing.Point(88, 9)
         Me.CmbDataSource.Name = "CmbDataSource"
         Me.CmbDataSource.Size = New System.Drawing.Size(228, 21)

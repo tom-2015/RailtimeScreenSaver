@@ -180,9 +180,17 @@ Public Class SNCB
 
         Debug.Print(Url)
         Request = HttpWebRequest.Create(Url)
+        Dim Response As HttpWebResponse = Nothing
+        Try
+            Response = Request.GetResponse()
+        Catch e As System.Net.WebException
+            Console.WriteLine("Fetching URL: " & Url & ": " & e.Message)
+            If RunningMode = ScreenSaverRunningModes.Configuration Then
+                MsgBox("Error getting url: " & Url & ": " & e.Message)
+            End If
+        End Try
 
-        Dim Response As HttpWebResponse = Request.GetResponse()
-        If Response.StatusCode = HttpStatusCode.OK Then
+        If Response IsNot Nothing AndAlso Response.StatusCode = HttpStatusCode.OK Then
             Dim ResponseStreamReader As StreamReader = New StreamReader(Response.GetResponseStream())
             Dim Xml As String = ResponseStreamReader.ReadToEnd()
             'Debug.Print(Xml)

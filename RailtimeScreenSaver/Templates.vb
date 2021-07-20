@@ -11,6 +11,17 @@ Public Class SNCBTemplate
     Protected m_DelayBackColor As Color
     Protected m_Columns As Integer
 
+    Protected m_UseColors As Boolean
+    Protected m_ColorEurostar As Color
+    Protected m_ColorThalys As Color
+    Protected m_ColorICE As Color
+    Protected m_ColorINT As Color
+    Protected m_ColorICT As Color
+    Protected m_ColorTGV As Color
+    Protected m_ColorBus As Color
+    Protected m_ColorTram As Color
+    Protected m_ColorMetro As Color
+
     Public Sub New(ByVal Settings As Settings)
         MyBase.New(Settings)
         m_Font = New Font("Arial", 10)
@@ -19,6 +30,17 @@ Public Class SNCBTemplate
         m_ForeColor = Color.FromArgb(Settings.GetSetting("template_sncb", "forecolor", Color.White.ToArgb()))
         m_BackColor = Color.FromArgb(Settings.GetSetting("template_sncb", "backcolor", Color.Black.ToArgb()))
         m_DelayBackColor = Color.FromArgb(Settings.GetSetting("template_sncb", "delay_backcolor", Color.OrangeRed.ToArgb()))
+        m_UseColors = Boolean.Parse(Settings.GetSetting("template_sncb", "use_color", "true"))
+        m_ColorBus = Color.FromArgb(Settings.GetSetting("template_sncb", "color_bus", Color.Yellow.ToArgb()))
+        m_ColorEurostar = Color.FromArgb(Settings.GetSetting("template_sncb", "color_eurostar", Color.Green.ToArgb()))
+        m_ColorICE = Color.FromArgb(Settings.GetSetting("template_sncb", "color_ice", Color.Orange.ToArgb()))
+        m_ColorICT = Color.FromArgb(Settings.GetSetting("template_sncb", "color_ict", Color.DarkGreen.ToArgb()))
+        m_ColorINT = Color.FromArgb(Settings.GetSetting("template_sncb_", "color_int", Color.FromArgb(&HFF, &H8F, &H0, &HFF).ToArgb()))
+        m_ColorMetro = Color.FromArgb(Settings.GetSetting("template_sncb", "color_metro", Color.Yellow.ToArgb()))
+        m_ColorTGV = Color.FromArgb(Settings.GetSetting("template_sncb", "color_tgv", Color.Yellow.ToArgb()))
+        m_ColorThalys = Color.FromArgb(Settings.GetSetting("template_sncb", "color_thalys", Color.Red.ToArgb()))
+        m_ColorTram = Color.FromArgb(Settings.GetSetting("template_sncb", "color_tram", Color.Yellow.ToArgb()))
+
         m_Columns = Settings.GetSetting("template_sncb", "columns", 2)
     End Sub
 
@@ -92,7 +114,7 @@ Public Class SNCBTemplate
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.ComponentModel.Description("Background color for delays and problems.")> _
+    <System.ComponentModel.Description("Background color for delays and problems.")>
     Public Property DelayBackColor() As Color
         Get
             Return m_DelayBackColor
@@ -108,7 +130,7 @@ Public Class SNCBTemplate
     ''' <value></value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.ComponentModel.Description("Sets number of columns to display on 1 screen.")> _
+    <System.ComponentModel.Description("Sets number of columns to display on 1 screen.")>
     Public Property Columns() As Integer
         Get
             Return m_Columns
@@ -118,6 +140,212 @@ Public Class SNCBTemplate
             If m_Columns <= 0 Then m_Columns = 1
         End Set
     End Property
+
+    ''' <summary>
+    ''' Gets / sets if we should use different colors for special trains like Thalys
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Enable / disable use of different colors for special trains or busses/trams like Thalys, Eurostar,...")>
+    Public Property UseColors() As Boolean
+        Get
+            Return m_UseColors
+        End Get
+        Set(ByVal value As Boolean)
+            m_UseColors = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Color for buses
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Sets the color to use for a bus.")>
+    Public Property ColorBus() As Color
+        Get
+            Return m_ColorBus
+        End Get
+        Set(ByVal value As Color)
+            m_ColorBus = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / Sets the color for Eurostar trains
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for Eurostar trains.")>
+    Public Property ColorEurostar() As Color
+        Get
+            Return m_ColorEurostar
+        End Get
+        Set(ByVal value As Color)
+            m_ColorEurostar = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / Sets the color for ICE trains
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for ICE trains.")>
+    Public Property ColorICE() As Color
+        Get
+            Return m_ColorICE
+        End Get
+        Set(ByVal value As Color)
+            m_ColorICE = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / Sets color for extra and ICT trains
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for ICT / EXT trains.")>
+    Public Property ColorICT() As Color
+        Get
+            Return m_ColorICT
+        End Get
+        Set(ByVal value As Color)
+            m_ColorICT = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Color for international trains
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for international trains.")>
+    Public Property ColorINT() As Color
+        Get
+            Return m_ColorINT
+        End Get
+        Set(ByVal value As Color)
+            m_ColorINT = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / sets the color for metro trains
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for metro.")>
+    Public Property ColorMetro() As Color
+        Get
+            Return m_ColorMetro
+        End Get
+        Set(ByVal value As Color)
+            m_ColorMetro = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / sets the color for TGV
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for TGV trains.")>
+    Public Property ColorTGV() As Color
+        Get
+            Return m_ColorTGV
+        End Get
+        Set(ByVal value As Color)
+            m_ColorTGV = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Gets / Sets the color for thalys
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for Thalys trains.")>
+    Public Property ColorThalys() As Color
+        Get
+            Return m_ColorThalys
+        End Get
+        Set(ByVal value As Color)
+            m_ColorThalys = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' Color for trams
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.ComponentModel.Description("Color for trams.")>
+    Public Property ColorTram() As Color
+        Get
+            Return m_ColorTram
+        End Get
+        Set(ByVal value As Color)
+            m_ColorTram = value
+        End Set
+    End Property
+
+
+
+    Protected Function GetTrainRectColor(ByVal Data As TrainData, ByVal Index As Integer) As Color
+        Dim DefaultColor As Color = IIf(Index Mod 2, m_Color1, m_Color2)
+        If m_UseColors Then
+            Select Case UCase$(Data.Type)
+                Case "EUR", "EST"
+                    Return m_ColorEurostar
+                Case "THA"
+                    Return m_ColorThalys
+                Case "ICE"
+                    Return m_ColorICE
+                Case "INT"
+                    Return m_ColorINT
+                Case "ICT", "EXT"
+                    Return m_ColorICT
+                Case "TGV"
+                    Return m_ColorTGV
+                Case "BUS"
+                    Return m_ColorBus
+                Case "TRA"
+                    Return m_ColorTram
+                Case "MET"
+                    Return m_ColorMetro
+                Case Else
+                    Return DefaultColor
+            End Select
+        End If
+        Return DefaultColor
+    End Function
+
+    Protected Function GetTrainTextBrush(ByVal BackColor As Color, ByVal NormalBrush As Brush, ByVal DarkBrush As Brush) As Brush
+        If m_UseColors Then
+            Dim Luminance As Single = (0.299 * BackColor.R + 0.587 * BackColor.G + 0.114 * BackColor.B) / 255
+
+            If Luminance > 0.7 Then
+                Return DarkBrush
+            Else
+                Return NormalBrush
+            End If
+        Else
+            Return NormalBrush
+        End If
+
+    End Function
 
     ''' <summary>
     ''' Renders the template on a graphics object
@@ -135,7 +363,7 @@ Public Class SNCBTemplate
         Dim RowHeight As Single = WindowSize.Height / TrainsPerColumn
         Dim BorderWidth As Single = RowHeight * 0.05
         Dim m_ForeColorBrush As New SolidBrush(m_ForeColor)
-
+        Dim m_DarkForeColorBrush As New SolidBrush(Color.Black)
 
         TrainData.LockTrainData()
         Graphics.Clear(m_BackColor)
@@ -180,12 +408,13 @@ Public Class SNCBTemplate
 
                         'draw background
                         Dim TrainRect As RectangleF = New RectangleF(BorderWidth, BorderWidth, ColumnWidth - 2 * BorderWidth, RowHeight - 2 * BorderWidth)
-                        Dim TrainRectColor As Color = IIf(TrainIndex Mod 2, m_Color1, m_Color2)
+                        Dim TrainRectColor As Color = GetTrainRectColor(Train, TrainIndex)
+                        Dim TrainTextBrush As Brush = GetTrainTextBrush(TrainRectColor, m_ForeColorBrush, m_DarkForeColorBrush)
                         Graphics.FillRectangle(New SolidBrush(TrainRectColor), TrainRect)
 
                         'draw destination & time
-                        Graphics.DrawString(Train.Time, TrainFont, m_ForeColorBrush, BorderWidth, BorderWidth)
-                        Graphics.DrawString(Train.Destination, TrainFont, m_ForeColorBrush, BorderWidth, TrainTextLineHeight + BorderWidth * 2)
+                        Graphics.DrawString(Train.Time, TrainFont, TrainTextBrush, BorderWidth, BorderWidth)
+                        Graphics.DrawString(Train.Destination, TrainFont, TrainTextBrush, BorderWidth, TrainTextLineHeight + BorderWidth * 2)
 
                         'draw track info
                         Dim TrackSize As SizeF = Graphics.MeasureString("999", TrainFont)
@@ -193,7 +422,7 @@ Public Class SNCBTemplate
                         Dim TrackColor As Color = m_ForeColor
                         Dim TrackText As String = Train.Track
                         If Train.TrackChanged Then
-                            Graphics.FillRectangle(m_ForeColorBrush, TrackRect)
+                            Graphics.FillRectangle(TrainTextBrush, TrackRect)
                             TrackColor = TrainRectColor
                         End If
                         If TrackText = "" AndAlso Train.Delay = 0 AndAlso Train.Info <> "" Then 'cancelled trains
@@ -209,10 +438,10 @@ Public Class SNCBTemplate
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString("S", TrainFont)
                             Dim STrainTypeSize As SizeF = Graphics.MeasureString("0", STrainTypeFont) ' STrainType, STrainTypeFont)
                             Dim STrainTypeCricle As New RectangleF(TrackRect.X - BorderWidth - STrainTypeSize.Width * 5 / 4, TrackRect.Y + TrainTypeSize.Height * 1 / 4, STrainTypeSize.Width * 2 * 4 / 5, STrainTypeSize.Width * 2 * 4 / 5)
-                            Graphics.DrawString("S", TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width - STrainTypeSize.Width, TrackRect.Y)
+                            Graphics.DrawString("S", TrainFont, TrainTextBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width - STrainTypeSize.Width, TrackRect.Y)
                             'Graphics.DrawString("S", TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width - STrainTypeCricle.Width, TrackRect.Y)
 
-                            Graphics.FillEllipse(m_ForeColorBrush, STrainTypeCricle)
+                            Graphics.FillEllipse(TrainTextBrush, STrainTypeCricle)
                             PrintCentered(STrainType, STrainTypeCricle, Graphics, STrainTypeFont, New SolidBrush(TrainRectColor))
                         ElseIf Train.IsAirportTrain AndAlso (Now.Second Mod 2) = 0 Then
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString("XX", TrainFont)
@@ -230,7 +459,8 @@ Public Class SNCBTemplate
                                 Dim Logo As Bitmap = My.Resources.ResourceManager.GetObject(TrainType)
                                 Dim LogoWidth As Double = TrackRect.Height / Logo.Height * Logo.Width * 7 / 8
                                 Dim Pallete As System.Drawing.Imaging.ColorPalette = Logo.Palette
-                                Pallete.Entries(0) = m_ForeColor
+
+                                Pallete.Entries(0) = CType(TrainTextBrush, SolidBrush).Color
                                 Pallete.Entries(1) = Color.FromArgb(0, TrainRectColor.R, TrainRectColor.G, TrainRectColor.B)
                                 Logo.Palette = Pallete
                                 Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBilinear
@@ -239,11 +469,11 @@ Public Class SNCBTemplate
                                 Graphics.DrawImage(Logo, New RectangleF(TrackRect.X - BorderWidth - LogoWidth, TrackRect.Y, LogoWidth, TrackRect.Height))
                             Else
                                 Dim TrainTypeSize As SizeF = Graphics.MeasureString(Train.TrainNumber, TrainFont)
-                                Graphics.DrawString(Train.TrainNumber, TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)
+                                Graphics.DrawString(Train.TrainNumber, TrainFont, TrainTextBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)
                             End If
                         Else
                             Dim TrainTypeSize As SizeF = Graphics.MeasureString(Train.Type, TrainFont)
-                            Graphics.DrawString(Train.Type, TrainFont, m_ForeColorBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)
+                            Graphics.DrawString(Train.Type, TrainFont, TrainTextBrush, TrackRect.X - BorderWidth - TrainTypeSize.Width, TrackRect.Y)
                         End If
 
                         'draw delay
@@ -257,7 +487,7 @@ Public Class SNCBTemplate
 
                             'draw white rectangle
                             Dim DelayRect As New RectangleF(0, 0, DelayRectSize.Width, TrainTextLineHeight)
-                            Graphics.FillRectangle(m_ForeColorBrush, DelayRect)
+                            Graphics.FillRectangle(TrainTextBrush, DelayRect)
 
                             'draw red rectangle
                             Dim DelayPath As New Drawing2D.GraphicsPath
@@ -270,7 +500,7 @@ Public Class SNCBTemplate
                             Graphics.FillPath(New SolidBrush(m_DelayBackColor), DelayPath)
 
                             'draw delay
-                            Graphics.DrawString("+" & Train.Delay & "'", TrainFont, m_ForeColorBrush, DelayRect.X, 0)
+                            Graphics.DrawString("+" & Train.Delay & "'", TrainFont, TrainTextBrush, DelayRect.X, 0)
 
                             Dim NewTime As String = SecToTime(TimeToSec(Train.Time) + Train.Delay * 60)
 
@@ -279,7 +509,7 @@ Public Class SNCBTemplate
                             Graphics.EndContainer(DelayContainer)
                         ElseIf Train.Info <> "" Then
                             Graphics.FillRectangle(New SolidBrush(m_DelayBackColor), New RectangleF(BorderWidth, BorderWidth * 3 + TrainTextLineHeight * 2, ColumnWidth - 2 * BorderWidth, TrainTextLineHeight + 2 * BorderWidth))
-                            Graphics.DrawString(Train.Info, TrainFont, m_ForeColorBrush, BorderWidth, TrainTextLineHeight * 2 + BorderWidth * 3)
+                            Graphics.DrawString(Train.Info, TrainFont, TrainTextBrush, BorderWidth, TrainTextLineHeight * 2 + BorderWidth * 3)
 
                             TrainLineIndex += 1
                         End If
@@ -312,12 +542,22 @@ Public Class SNCBTemplate
     End Function
 
     Public Overrides Sub SaveSettings(ByVal Settings As Settings)
+        Settings.SaveSetting("template_sncb", "use_color", m_UseColors)
         Settings.SaveSetting("template_sncb", "color1", m_Color1.ToArgb())
         Settings.SaveSetting("template_sncb", "color2", m_Color2.ToArgb())
         Settings.SaveSetting("template_sncb", "forecolor", m_ForeColor.ToArgb())
         Settings.SaveSetting("template_sncb", "backcolor", m_BackColor.ToArgb())
         Settings.SaveSetting("template_sncb", "delay_backcolor", m_DelayBackColor.ToArgb())
         Settings.SaveSetting("template_sncb", "columns", m_Columns)
+
+        Settings.SaveSetting("template_sncb", "color_bus", m_ColorBus.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_eurostar", m_ColorEurostar.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_ice", m_ColorICE.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_int", m_ColorINT.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_metro", m_ColorMetro.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_tgv", m_ColorTGV.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_thalys", m_ColorThalys.ToArgb())
+        Settings.SaveSetting("template_sncb", "color_tram", m_ColorTram.ToArgb())
     End Sub
 
 

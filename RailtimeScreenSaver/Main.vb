@@ -51,10 +51,13 @@ Module Main
         SettingsFile = GetSettingsFile()
         Settings = New Settings()
         Settings.Load(SettingsFile)
+        Settings.SaveSetting("general", "traingrabber", "irail")
 
         Select Case LCase(Settings.GetSetting("general", "data_grabber", "m.nmbs.be"))
             Case "m.nmbs.be"
                 TrainDataGrabber = New SNCB(Settings)
+            Case "api.irail.be"
+                TrainDataGrabber = New Irail(Settings)
             Case Else
                 TrainDataGrabber = New SNCB(Settings)
         End Select

@@ -11,7 +11,10 @@ Public Class FrmOptions
         ElseIf TypeOf Template Is SNCBTemplate Then
             CmbTemplate.SelectedIndex = 1
         End If
-        CmbDataSource.SelectedIndex = 0
+        Dim Grabber As String = Main.Settings.GetSetting("general", "data_grabber", "m.nmbs.be")
+        For i As Integer = 0 To CmbDataSource.Items.Count - 1
+            If CmbDataSource.Items(i).ToString() = Grabber Then CmbDataSource.SelectedIndex = i
+        Next
         LblVersion.Text = Assembly.GetExecutingAssembly().GetName().Version().ToString()
 
     End Sub
