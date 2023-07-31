@@ -102,11 +102,13 @@
     ''' <param name="g"></param>
     ''' <param name="Font"></param>
     ''' <param name="Brush"></param>
+    ''' <returns>The font used</returns>
     ''' <remarks></remarks>
-    Public Sub PrintCenteredAutoFontSize(ByVal Text As String, ByVal Rect As RectangleF, ByVal g As Graphics, ByVal Font As Font, ByVal Brush As Brush)
+    Public Function PrintCenteredAutoFontSize(ByVal Text As String, ByVal Rect As RectangleF, ByVal g As Graphics, ByVal Font As Font, ByVal Brush As Brush) As Font
         Dim FontToUse As Font = FindFontSize(g, Text, Rect.Size, Font)
         PrintCentered(Text, Rect, g, FontToUse, Brush)
-    End Sub
+        Return FontToUse
+    End Function
 
     Public Function TimeToSec(ByVal Time As String) As Integer
         Dim Pos As Integer = InStr(Time, ":")

@@ -67,6 +67,8 @@ Module Main
                 Template = New SNCBTemplate(Settings)
             Case "sncb classic"
                 Template = New SNCBClassicTemplate(Settings)
+            Case "sncb new look 2022"
+                Template = New SNCBNewLook2022Template(Settings)
             Case Else
                 Template = New SNCBClassicTemplate(Settings)
         End Select

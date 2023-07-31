@@ -125,8 +125,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Preview.vb" />
+    <Compile Include="RoundedRectangle.vb" />
     <Compile Include="SNCB.vb" />
     <Compile Include="Settings.vb" />
+    <Compile Include="SNCBNewLook2022Template.vb" />
     <Compile Include="Templates.vb" />
     <Compile Include="TrainDataAPI.vb" />
   </ItemGroup>

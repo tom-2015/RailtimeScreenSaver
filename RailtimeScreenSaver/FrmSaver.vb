@@ -75,12 +75,12 @@ Public Class FrmSaver
     End Sub
 
     Private Sub FrmSaver_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        Try
-            Template.Render(m_DisplayNr, e.Graphics, Me.ClientSize(), TrainDataGrabber)
-        Catch Ex As Exception
-            Debug.Print(Ex.ToString())
-            Console.WriteLine(Ex.ToString())
-        End Try
+        'Try
+        Template.Render(m_DisplayNr, e.Graphics, Me.ClientSize(), TrainDataGrabber)
+        ' Catch Ex As Exception
+        ' Debug.Print(Ex.ToString())
+        '     Console.WriteLine(Ex.ToString())
+        ' End Try
     End Sub
 
     Private Sub FrmSaver_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize

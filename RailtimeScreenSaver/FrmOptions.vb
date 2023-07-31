@@ -10,6 +10,8 @@ Public Class FrmOptions
             CmbTemplate.SelectedIndex = 0
         ElseIf TypeOf Template Is SNCBTemplate Then
             CmbTemplate.SelectedIndex = 1
+        ElseIf TypeOf Template Is SNCBNewLook2022Template Then
+            CmbTemplate.SelectedIndex = 2
         End If
         Dim Grabber As String = Main.Settings.GetSetting("general", "data_grabber", "m.nmbs.be")
         For i As Integer = 0 To CmbDataSource.Items.Count - 1
@@ -49,6 +51,11 @@ Public Class FrmOptions
 
     Private Sub CmbTemplate_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CmbTemplate.SelectedIndexChanged
         Select Case CmbTemplate.Text
+            Case "SNCB new look 2022"
+                If Not TypeOf Template Is SNCBNewLook2022Template Then
+                    Template.SaveSettings(Main.Settings)
+                    Template = New SNCBNewLook2022Template(Main.Settings)
+                End If
             Case "SNCB Classic"
                 If Not TypeOf Template Is SNCBClassicTemplate Then
                     Template.SaveSettings(Main.Settings)

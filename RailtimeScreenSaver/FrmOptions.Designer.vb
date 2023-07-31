@@ -115,7 +115,7 @@ Partial Class FrmOptions
         '
         Me.CmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbTemplate.FormattingEnabled = True
-        Me.CmbTemplate.Items.AddRange(New Object() {"SNCB Classic", "SNCB"})
+        Me.CmbTemplate.Items.AddRange(New Object() {"SNCB Classic", "SNCB", "SNCB new look 2022"})
         Me.CmbTemplate.Location = New System.Drawing.Point(66, 10)
         Me.CmbTemplate.Name = "CmbTemplate"
         Me.CmbTemplate.Size = New System.Drawing.Size(252, 21)
